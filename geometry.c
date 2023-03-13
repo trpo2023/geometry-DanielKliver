@@ -1,29 +1,40 @@
 #include <stdio.h>
-	/*
-void getData(const char * s_)
+#include <stdlib.h>
+#include <string.h>
+
+char* readfile(char* string)
 {
-	char * s = _strdup(s_); // Чтоб можно было strtok пользовать
-	for(char * c = strtok(s,"}"); c; c = strtok(NULL,"}"))
-	{
-		char s1[128]; int a[4];
-		sscanf(c,"%*[^']'%[^']%*[^0-9]%d%*[^0-9]%d%*[^0-9]%d%*[^0-9]%d",s1,&a[0],&a[1],&a[2],&a[3]);
-		printf("%s %d %d %d %d\n",s1,a[0],a[1],a[2],a[3]);
-	}
-	free(s);
-}
-*/
-int main()
-{
-	FILE *file;
-	char string[1000000];
+	FILE* file;
 	file = fopen("fig.txt", "r");
+	string = malloc(sizeof(file)*sizeof(char)+1);
+
 	while(!feof(file))
 	{
-		if(fgets(string, sizeof(string),file) != NULL)
-		{
-		printf("%s", string);
-		}
+		fgets(string, 10000,file);
 	}
 	fclose(file);
+	return string;
+	free(string);
+
+}
+
+void getdata(char *string)
+{
+	char sep [10]="(,)";
+	char *istr;
+	istr = strtok (string,sep);
+	while (istr != NULL)
+	{
+		printf ("%s\n",istr);
+		istr = strtok (NULL,sep);
+	}
+
+}
+
+int main()
+{
+	char* string = NULL;
+	string = readfile(string);
+	getdata(string);
 	return 0;
 }
