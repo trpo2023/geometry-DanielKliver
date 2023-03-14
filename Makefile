@@ -1,5 +1,5 @@
-Howlow : Howlow.c
-	gcc -Wall -o Howlow Howlow.c
+geometry : geometry.c
+	gcc -Wall -Werror -o geometry geometry.c
 
-run : Howlow
+
 	
