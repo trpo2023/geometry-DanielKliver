@@ -1,2 +1,3 @@
 *Makefile
-*geometry
+*main
+*.clang-format
