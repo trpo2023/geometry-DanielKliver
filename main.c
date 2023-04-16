@@ -36,9 +36,6 @@ int ERRORS(int errorcode)
 		case 6:
 			printf("Нет запятой\n");
 			break;
-		case 7:
-			printf("Неправильное имя\n");
-			return -1;
 		default:
 			printf("Неверный код ошибки\n");
 	}
@@ -52,107 +49,100 @@ void strlower(char* string)
 	}
 
 }
-int* getdatacircle(char* string, int countfig, struct Circle *circle)
+void getdatacircle(char* string, int countfig, struct Circle *circle)
 {
 	if(string[0] == 'c' || string[0] == 't')
 	{
-		if(string[0] == 'c')
+		if(string[0] == 'c' && string[1] == 'i' && string[2] == 'r' && string[3] == 'c' && string[4] == 'l' && string[5] == 'e')
 		{
-			if(string[5] == 'e')
-			{
-				circle[1].name = "circle";
-			}
-			else
-			{
-				int errorcode = 7;
-				ERRORS(errorcode);
-			}
-		}
-	}
-	else
-	{
-		int errorcode = 3;
-		ERRORS(errorcode);
-	}
-	int point = 6;
-	int rock = 0;
-	char save[rock];
-	while(string[point] == ' ')
-	{
-		point++;
-	}
-	while(string[point] != ' ')
-	{
-		if(string[point] == '(')
-		{
-			point++;
+			circle[1].name = "circle";
 		}
 		else
 		{
-			int errorcode = 4;
+			int errorcode = 3;
 			ERRORS(errorcode);
 		}
-		save[rock] = string[point];
-		rock++;
-		point++;
+
 	}
-	circle[countfig].x = atof(save);
-	while(string[point] == ' ')
-	{
-		point++;
-	}
-	if(string[point] == ',')
-	{
-		int errorcode = 6;
-		ERRORS(errorcode);
-	}
-	rock = 0;
-	char savex[rock];
-	while(string[point] != ' ')
-	{
-		if(string[point]==',')
-		{
-			break;
-		}
-		savex[rock] = string[point];
-		rock++;
-		point++;
-	}
-	circle[countfig].y = atof(savex);
-	while(string[point] == ' ')
-	{
-		point++;
-	}
-	if(string[point] == ',')
+
+int point = 6;
+int point_for_save = 0;
+char save[0];
+while (string[point] == ' ')
+{
+	point++;
+}
+while (string[point] != ' ')
+{
+	if(string[point] == '(')
 	{
 		point++;
 	}
 	else
 	{
-		int errorcode = 6;
+		int errorcode = 4;
 		ERRORS(errorcode);
 	}
-	while(string[point] == ' ')
+	save[point_for_save] = string[point];
+	point_for_save++;
+	point++;
+}
+circle[countfig].x = atof(save);
+while(string[point] == ' ')
+{
+	point++;
+}
+if(string[point] == ',')
+{
+	int errorcode = 6;
+	ERRORS(errorcode);
+}
+point_for_save = 0;
+char savex[point_for_save];
+while(string[point] != ' ')
+{
+	if(string[point]==',')
 	{
-		point++;
+		break;
 	}
-	rock = 0;
-	char savediam[rock];
-	while((string[point] != ' ')&&(string[point]!=')'))
-	{
-		savediam[rock] = string[point];
-		rock++;
-		point++;
-	}
-	if(string[point] != ')')
-	{
-		int errorcode = 5;
-		ERRORS(errorcode);
-	}
-	circle[countfig].diameter = atof(savediam);
-	circle[countfig].square = (3.14*(circle[countfig].diameter/2)*(circle[countfig].diameter/2));
-	circle[countfig].perimeter = (2*3.14*(circle[countfig].diameter/2));
-	return 0;
+	savex[point_for_save] = string[point];
+	point_for_save++;
+	point++;
+}
+circle[countfig].y = atof(savex);
+while(string[point] == ' ')
+{
+	point++;
+}
+if(string[point] == ',')
+{
+	point++;
+}
+else
+{
+	int errorcode = 6;
+	ERRORS(errorcode);
+}
+while(string[point] == ' ')
+{
+	point++;
+}
+point_for_save = 0;
+char savediam[point_for_save];
+while((string[point] != ' ')&&(string[point]!=')')&&string[point]!='\000')
+{
+	savediam[point_for_save] = string[point];
+	point_for_save++;
+	point++;
+}
+if(string[point] != ')')
+{
+	int errorcode = 5;
+	ERRORS(errorcode);
+}
+circle[countfig].diameter = atof(savediam);
+circle[countfig].square = (3.14*(circle[countfig].diameter/2)*(circle[countfig].diameter/2));
+circle[countfig].perimeter = (2*3.14*(circle[countfig].diameter/2));
 }
 int readfile(char* string, struct Circle *circle, int countfig)
 {
