@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <math.h>
-#include "parser_for_circle.h"
-#include "errors.h"
+#include <parser_for_circle.h>
+#include <errors.h>
 
 int main()
 {
