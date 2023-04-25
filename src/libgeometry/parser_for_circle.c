@@ -109,9 +109,10 @@ void getdatacircle(char* string, int countfig, Circle *circle)
 	circle[countfig].square = (3.14*(circle[countfig].diameter/2)*(circle[countfig].diameter/2));
 	circle[countfig].perimeter = (2*3.14*(circle[countfig].diameter/2));
 }
-int readfile(char* string, Circle *circle, int countfig)
+int readfile(char* string, Circle *circle, int countfig, const char* patch)
 {
-	FILE* file = fopen("fig.txt", "r");
+	const char* mode = "r";
+	FILE* file = fopen(patch, mode);
 	if(file == NULL)
 	{
 		int errorcode = 1;

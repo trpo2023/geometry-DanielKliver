@@ -1,7 +1,7 @@
 TARGET = ./bin/MyProject
 CC = gcc
 
-CFLAGS = -Wall 
+CFLAGS = -Wall -Werror 
 PATH_INCLUDE = -Isrc/libgeometry
 
 PREF_SRCMAIN = ./src/geometry/
